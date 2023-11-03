@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Rerlego Download",
+  "name": "Perlego Download",
   "version": "1.0",
   "action": { 
     "default_popup": "popup.html"
