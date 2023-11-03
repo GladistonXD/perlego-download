@@ -26,16 +26,17 @@ function clicarEcapturarConteudoBruto(indice, pagefinal) {
                         scroll();
                     });
                 };
-
                 scrollToBottom().then(() => {
-                    var xpath = '//*[@id="p'+indice+'--0"]'; 
-                    var elementoCapturado = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-
-                    if (elementoCapturado) {
-                        resolve(elementoCapturado.outerHTML);
-                    } else {
-                        reject('Elemento não encontrado ' + indice);
+                    var xpath = '//*[@id="p'+indice+'--0"]';
+                    function verificarElemento() {
+                        var elementoCapturado = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+                        if (elementoCapturado) {
+                            resolve(elementoCapturado.outerHTML);
+                        } else {
+                            setTimeout(verificarElemento, 1000);
+                        }
                     }
+                    verificarElemento(); 
                 }).catch((error) => {
                     reject(error);
                 });
@@ -63,18 +64,21 @@ function clicarEcapturarConteudoBruto(indice, pagefinal) {
 						        scroll();
 						    });
 						};
-
-                		scrollToBottom().then(() => {
-							var xpath = '//*[@id="p'+indice+'--0"]'; 
-							var elementoCapturado = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-
-							if (elementoCapturado) {
-								resolve(elementoCapturado.outerHTML); 
-								}
-							}).catch((error) => {
-								reject(error);
-							});
-						}, 2000); 					
+                    scrollToBottom().then(() => {
+                        var xpath = '//*[@id="p'+indice+'--0"]';
+                        function verificarElemento() {
+                            var elementoCapturado = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+                            if (elementoCapturado) {
+                                resolve(elementoCapturado.outerHTML);
+                            } else {
+                                setTimeout(verificarElemento, 1000);
+                            }
+                    }
+                    verificarElemento(); 
+                    }).catch((error) => {
+                        reject(error);
+                    });		
+				}, 2000); 					
 				} else {
 						try{
 							const num = indice+1
