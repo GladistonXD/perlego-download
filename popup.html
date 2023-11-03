@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Minha Extensão</title>
+  <style>
+    body {
+      width: 200px;
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+
+    #executar {
+      margin-bottom: 20px; /* Adiciona espaço entre o botão e a barra de progresso */
+    }
+
+    #progressBar {
+      width: 100%;
+      height: 20px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      display: none; /* Inicialmente oculto até que o progresso seja exibido */
+    }
+
+    #progress {
+      width: 0;
+      height: 100%;
+      background-color: #4caf50;
+    }
+  </style>
+</head>
+<body>
+  <button id="executar">ePUB (auto)</button>
+  <button id="manual">PDF (manual)</button>
+  <div id="progressBar">
+    <div id="progress"></div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Rerlego Download",
+  "version": "1.0",
+  "action": { 
+    "default_popup": "popup.html"
+  },
+  "background": { 
+    "service_worker": "background.js"
+  },
+  "content_scripts": [ 
+    {
+      "matches": ["https://ereader.perlego.com/*"], 
+      "js": ["content.js"] 
+    }
+  ],
+  "icons": {
+    "128": "logo.png"
+  },
+  "permissions": [
+    "unlimitedStorage",
+    "notifications",
+    "activeTab", 
+    "storage",
+	"scripting"
+  ]
+}
