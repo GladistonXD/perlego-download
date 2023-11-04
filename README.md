@@ -14,4 +14,4 @@ If you get lost in the pages of the manual PDF format, or there is a connection 
 
 # *Read the description of each format to avoid browser crashes*
 ![image](https://github.com/GladistonXD/perlego-download/assets/50533550/bfed5fbc-2122-4ab8-b948-e64619ad9b7d)
-
+*After accessing the book normally via: `https://ereader.perlego.com/1/book/(ID*)` you can start the automation.*
