@@ -18,7 +18,7 @@ try {
 	stopButton.style.fontWeight = 'bold';
 	document.body.appendChild(stopButton);
 	let timeoutID;
-	let resultadosHTML = '<html><head><title>Resultados da Busca</title></head><body>';
+	let resultadosHTML = '<html><head><title>Resultados da Busca</title></head><body>'+'\n';
 
 	stopButton.addEventListener('click', () => {
 		stopButton.remove(); 
@@ -37,7 +37,7 @@ try {
 		const elemento = document.evaluate(`//*[@id="p${pagina}--0"]/div/div[2]/object`, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 		const elementox = document.evaluate(`//*[@id="p${pagina}--0"]/div/div[2]`, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 		if (elemento) {
-			return elementox.innerHTML;
+			return elementox.innerHTML+'\n';
 		}
 		return null;
 	}
