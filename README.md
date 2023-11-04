@@ -1,5 +1,7 @@
 # A Chrome extension to automate content downloads
 
+# An active account is required.
+
 After finishing the script, a ".html" file is generated in which it is possible to print in PDF
 
 In the PDF version, as it does not scroll automatically, I suggest pressing the scroll button and moving the mouse down slightly, or pressing the "Page Down" button to speed up the process.
