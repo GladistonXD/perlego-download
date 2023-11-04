@@ -1,4 +1,4 @@
-const time = 3000
+const time = 1000
 
 function enviarProgresso(progress){
 	chrome.runtime.sendMessage({ type: 'progressUpdate', progress: progress });
