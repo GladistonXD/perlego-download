@@ -15,5 +15,8 @@ If the file is so large that the browser cannot process it, you can edit the .ht
 *I'm not responsible for anything, feel free to take this code and use it as you see fit, I don't guarantee it will work, there will probably be no updates as I'm in the 7-day free period, I made this script just for fun, some books may have specific bugs because I didn't have time to test all the possibilities.*
 
 # *Read the description of each format to avoid browser crashes*
-![image](https://github.com/GladistonXD/perlego-download/assets/50533550/bfed5fbc-2122-4ab8-b948-e64619ad9b7d)
+<p align="start">
+<img src="https://github.com/GladistonXD/perlego-download/assets/50533550/bfed5fbc-2122-4ab8-b948-e64619ad9b7d" alt="Description" width="50%" height="50%"/>
+</p>
+
 *After accessing the book normally via: `https://ereader.perlego.com/1/book/(ID*)` you can start the automation.*
