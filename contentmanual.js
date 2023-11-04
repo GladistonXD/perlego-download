@@ -18,13 +18,13 @@ try {
 	stopButton.style.fontWeight = 'bold';
 	document.body.appendChild(stopButton);
 	let timeoutID;
-	let resultadosHTML = '<html><head><title>Resultados da Busca</title></head><body>'+'\n';
+	let resultadosHTML = '';
 
 	stopButton.addEventListener('click', () => {
 		stopButton.remove(); 
 		window.clearTimeout(timeoutID);
 		console.log("Busca encerrada pelo usuário.");
-		resultadosHTML += '</body></html>'; 
+		resultadosHTML += ''; 
 		downloadResultados(resultadosHTML, 'perlego.html');
 
 		let mensagem = document.getElementById('mensagem');
