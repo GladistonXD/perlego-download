@@ -37,7 +37,7 @@ try {
 		const elemento = document.evaluate(`//*[@id="p${pagina}--0"]/div/div[2]/object`, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 		const elementox = document.evaluate(`//*[@id="p${pagina}--0"]/div/div[2]`, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 		if (elemento) {
-			return elementox.innerHTML+'\n';
+			return elementox.innerHTML+'\n'+'<br>'+'\n';
 		}
 		return null;
 	}
