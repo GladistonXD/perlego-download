@@ -10,7 +10,7 @@ It is very important to go to the end of the page of the saved .html file if you
 
 If you get lost in the pages of the manual PDF format, or there is a connection error that makes it impossible to continue, you can use the `Table of contents` to guide you, however, before opening the contents it is very important not to leave it on the `/0` page because the site has a bug that says that PDF does not exist on page '0' so the tab will freeze, I advise you to reload the page directly at `/3`, this bug only happens in PDF format.
 
-If the file is so large that the browser cannot process it, you can edit the .html and cut it into parts to divide the process.
+If the file is so large that the browser cannot process it, you can edit the .html and cut it into parts to split the process, or use another browser to open the .html, I recommend Firefox which uses less memory.
 
 *I'm not responsible for anything, feel free to take this code and use it as you see fit, I don't guarantee it will work, there will probably be no updates as I'm in the 7-day free period, I made this script just for fun, some books may have specific bugs because I didn't have time to test all the possibilities.*
 
