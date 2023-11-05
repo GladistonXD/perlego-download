@@ -12,7 +12,7 @@ If you get lost in the pages of the manual PDF format, or there is a connection 
 
 If the file is so large that the browser cannot process it, you can edit the .html and cut it into parts to split the process, or use another browser to open the .html, I recommend Firefox which uses less memory.
 
-*I'm not responsible for anything, feel free to take this code and use it as you see fit, I don't guarantee it will work, there will probably be no updates as I'm in the 7-day free period, I made this script just for fun, some books may have specific bugs because I didn't have time to test all the possibilities.*
+> For offline use it is necessary to transform the file into PDF, otherwise you will only view images online.
 
 # *Read the description of each format to avoid browser crashes*
 <p align="start">
@@ -20,3 +20,5 @@ If the file is so large that the browser cannot process it, you can edit the .ht
 </p>
 
 *After accessing the book normally via: `https://ereader.perlego.com/1/book/(ID*)` you can start the automation.*
+
+>*I'm not responsible for anything, feel free to take this code and use it as you see fit, I don't guarantee it will work, there will probably be no updates as I'm in the 7-day free period, I made this script just for fun, some books may have specific bugs because I didn't have time to test all the possibilities.*
