@@ -1,15 +1,15 @@
 function enviarProgresso(progress){
 	chrome.runtime.sendMessage({ type: 'progressUpdate', progress: progress });
 }
-	
+
 function clicarEcapturarConteudoBruto(indice, pagefinal) {
-	const time = 1000
+	const time = 4000
 	return new Promise((resolve, reject) => {
 		var elementoIndex = document.querySelector('[data-test-locator="Epub-ChapterRow-Index-'+indice+'"] [tabindex="0"]');
 		if (elementoIndex) {
 			elementoIndex.click();
 			setTimeout(() => {
-				var scrollToBottom = () => {
+				/*var scrollToBottom = () => {
 					return new Promise((resolveScroll, rejectScroll) => {
 						var scroll = () => {
 							window.scrollBy(0, window.innerHeight);
@@ -24,21 +24,20 @@ function clicarEcapturarConteudoBruto(indice, pagefinal) {
 						scroll();
 					});
 				};
-				scrollToBottom().then(() => {
-				var xpath = '//*[@id="p'+indice+'--0"]';
+				scrollToBottom().then(() => {*/
 				function verificarElemento() {
-					var elementoCapturado = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+					var elementoCapturado = document.evaluate("//div[@class='chapter-loaded highlighter-context' and @id='p"+indice+"--0']", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 					if (elementoCapturado) {
-						resolve(elementoCapturado.outerHTML);
+						resolve(elementoCapturado.outerHTML+'<br>\n\n');
 						} else {
 							setTimeout(verificarElemento, 1000);
 						}
 					}
 					verificarElemento(); 
-				}).catch((error) => {
-					reject(error);
-				});
-			}, 2000);
+				//}).catch((error) => {
+				//	reject(error);
+				//});
+			}, time);
 		
 		} else {
 			try	{
@@ -46,7 +45,7 @@ function clicarEcapturarConteudoBruto(indice, pagefinal) {
 				if (elemento) {
 					elemento.click();
 					setTimeout(() => {
-						var scrollToBottom = () => {
+						/*var scrollToBottom = () => {
 							return new Promise((resolveScroll, rejectScroll) => {
 								var scroll = () => {
 									window.scrollBy(0, window.innerHeight);
@@ -61,21 +60,21 @@ function clicarEcapturarConteudoBruto(indice, pagefinal) {
 								scroll();
 							});
 						};
-						scrollToBottom().then(() => {
-							var xpath = '//*[@id="p'+indice+'--0"]';
+						scrollToBottom().then(() => {*/
+							//var xpath = '//*[@id="p'+indice+'--0"]';
 							function verificarElemento() {
-								var elementoCapturado = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+								var elementoCapturado = document.evaluate("//div[@class='chapter-loaded highlighter-context' and @id='p"+indice+"--0']", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 								if (elementoCapturado) {
-									resolve(elementoCapturado.outerHTML);
+									resolve(elementoCapturado.outerHTML+'<br>\n\n');
 								} else {
 									setTimeout(verificarElemento, 1000);
 								}
 							}
 						verificarElemento(); 
-						}).catch((error) => {
-							reject(error);
-						});		
-					}, 2000); 					
+						//}).catch((error) => {
+						//	reject(error);
+						//});		
+					}, time); 					
 				} else {
 					try	{
 						const num = indice+1
@@ -107,11 +106,8 @@ function clicarEcapturarConteudoBruto(indice, pagefinal) {
 	});
 }
 
-
-
-async function criarArquivoDownloadComConteudo() {
+async function abrirbotao(){
 	const botaoTOC = document.querySelector('button[data-test-locator="Icon-TOC"]');
-
 	if (!botaoTOC) {
 		console.log("Botão do Table of Contents não encontrado");
 	} else {
@@ -125,13 +121,20 @@ async function criarArquivoDownloadComConteudo() {
 			setTimeout(() => {
 				conteudoTOC = document.querySelector('[data-test-locator="ToolbarPanel"]');
 				if (conteudoTOC) {
+					criarArquivoDownloadComConteudo();
 					console.log("Conteúdo do Table of Contents foi aberto com sucesso.");
 				} else {
 					console.log("Falha ao abrir o conteúdo do Table of Contents.");
 				}
 			}, 2000);
+		} else {
+			criarArquivoDownloadComConteudo();
 		}
 	}
+}
+
+
+async function criarArquivoDownloadComConteudo() {
 
 	var todoConteudoBruto = '';
 	const elementos = document.querySelectorAll('[data-test-locator^="Epub-ChapterRow-"]');
@@ -175,7 +178,7 @@ async function criarArquivoDownloadComConteudo() {
 		}
 
 		let modificado = modified_html.replace(/">https/g, '" src="https').replace(/opacity: 0/g, 'opacity: 1').replace(/<.picture><.picture>/g, '</picture>');
-		var blob = new Blob(['<head><meta charset="UTF-8"></head><div id="content" class="content highlighter-context" col-centered="true" style="color: rgb(249, 248, 246); max-width: 792.952px;">'+modificado.replace(/Georgia; object-fit: contain; width: 100%; height: 100%;/g,'Georgia; object-fit: contain; width: 100%;')], { type: 'text/html' });
+		var blob = new Blob(['<head><meta charset="UTF-8"></head><div id="content" class="content highlighter-context" col-centered="true" style="max-width: 792.952px;">'+modificado.replace(/Georgia; object-fit: contain; width: 100%; height: 100%;/g,'Georgia; object-fit: contain; width: 100%;')], { type: 'text/html' });
 
 		var link = document.createElement('a');
 		link.href = URL.createObjectURL(blob);
@@ -184,4 +187,4 @@ async function criarArquivoDownloadComConteudo() {
 		link.click();
 	}
 }
-criarArquivoDownloadComConteudo();
+abrirbotao()
