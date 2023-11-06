@@ -96,14 +96,14 @@ async function startSearchingAndSaving() {
                         mensagem.style.fontWeight = 'bold';
                         mensagem.id = 'mensagem';
                         document.body.appendChild(mensagem);
-						}
-						mensagem.textContent = `Page ${pagina-1}/${pagefinal} found. Keep scrolling to the page ${pagefinal}`;
-						rolarAteEncontrarPagina(pagina);
+                        }
+                        mensagem.textContent = `Page ${pagina-1}/${pagefinal} found. Keep scrolling to the page ${pagefinal}`;
+                        rolarAteEncontrarPagina(pagina);
                     } else if (!stopSearch) {
-						let mensagemElement = document.getElementById('mensagem');
-						if (mensagemElement) {
-    						mensagemElement.textContent = `Page ${pagina}/${pagefinal} found. Keep scrolling to the page ${pagefinal}`;
-						}
+                        let mensagemElement = document.getElementById('mensagem');
+                        if (mensagemElement) {
+                            mensagemElement.textContent = `Page ${pagina}/${pagefinal} found. Keep scrolling to the page ${pagefinal}`;
+                        }
                         console.log(`Conteúdo do elemento da página ${pagina} encontrado:`);
                         const progressoAtual = Math.floor((pagina / pagefinal) * 100);
                         enviarProgresso(progressoAtual);
@@ -114,7 +114,7 @@ async function startSearchingAndSaving() {
                         rolarAteEncontrarPagina(pagina + 1);
                         if (pagina === pagefinal) {
                             stopButton.click();
-							stopSearch = true;
+                            stopSearch = true;
                             return; 
                         }
                     }                    
