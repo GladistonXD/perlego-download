@@ -15,5 +15,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         files: ['contentmanual.js']
       });
     });
+  } else if (message.type === 'resetAndStartCapture') {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      const id = tabs[0].id;
+      chrome.scripting.executeScript({
+        target: { tabId: id, allFrames: true },
+        files: ['resetcache.js']
+      });
+    });
   }
 });
+

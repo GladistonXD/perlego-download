@@ -28,3 +28,8 @@ document.getElementById('manual').addEventListener('click', () => {
 	console.log('Manual')
   showProgressBar();
 });
+
+document.getElementById('clear').addEventListener('click', () => {
+  chrome.runtime.sendMessage({ type: 'resetAndStartCapture' });
+	console.log('clear')
+});
