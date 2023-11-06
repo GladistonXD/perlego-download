@@ -12,6 +12,9 @@ If you get lost in the pages of the manual PDF format, or there is a connection 
 
 If the file is so large that the browser cannot process it, you can edit the .html and cut it into parts to split the process, or use another browser to open the .html, I recommend Firefox which uses less memory.
 
+> # New function to continue where you left off:
+Now you can reload the page if it's stuck, then just click again to start and continue where you left off, and just below there is a button to reset this continuity if necessary.
+
 > For offline use it is necessary to transform the file into PDF, otherwise you will only view images online.
 
 # *Read the description of each format to avoid browser crashes*
