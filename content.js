@@ -281,5 +281,4 @@ async function resetarEIniciarCaptura() {
     await resetLastProcessedIndex(db);
 }
 
-
 abrirbotao()
