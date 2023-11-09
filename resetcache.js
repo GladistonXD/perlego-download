@@ -39,9 +39,9 @@ async function resetAllContent(db) {
 }
 
 async function resetarEIniciarCaptura() {
-    const db = await openIndexedDB(); // Abre o IndexedDB
-    await resetAllContent(db); // Limpa todo o conteúdo armazenado
-    await resetLastProcessedIndex(db); // Reseta o lastProcessedIndex para começar do início
+    const db = await openIndexedDB(); 
+    await resetAllContent(db); 
+    await resetLastProcessedIndex(db); 
 	alert('Continuity clean successfully!');
 }
 
