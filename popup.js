@@ -11,7 +11,7 @@ function showProgressBar() {
 }
 
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => { 
   if (message.type === 'progressUpdate') {
     updateProgressBar(message.progress);
   }
