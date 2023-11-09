@@ -6,7 +6,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         target: { tabId: id, allFrames: true },
         files: ['content.js']
       });
-    });
+    }); 
   } else if (message.type === 'startScriptmanual') {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const id = tabs[0].id;
