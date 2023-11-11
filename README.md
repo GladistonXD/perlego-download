@@ -2,7 +2,7 @@
 
 # An active account is required.
 
-# To install this extension in chrome please follow the steps indicated [here](https://dev.to/ben/how-to-install-chrome-extensions-manually-from-github-1612).
+-  **To install this extension in chrome please follow the steps indicated [here](https://dev.to/ben/how-to-install-chrome-extensions-manually-from-github-1612).**
 
 After finishing the script, a ".html" file is generated in which it is possible to print in PDF
 
