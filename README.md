@@ -2,6 +2,8 @@
 
 # An active account is required.
 
+# To install this extension in chrome please follow the steps indicated [here](https://dev.to/ben/how-to-install-chrome-extensions-manually-from-github-1612).
+
 After finishing the script, a ".html" file is generated in which it is possible to print in PDF
 
 In the PDF version, as it does not scroll automatically, I suggest pressing the scroll button and moving the mouse down slightly, or pressing the "Page Down" button to speed up the process.
