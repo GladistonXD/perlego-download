@@ -16,7 +16,7 @@ async function procurarElemento(pagina) {
 }
 
 async function downloadResultados(resultados, nomeArquivo) {
-    const blob = new Blob([resultados], { type: 'text/html' });
+    const blob = new Blob(resultados, { type: 'text/html' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
     link.download = nomeArquivo;
