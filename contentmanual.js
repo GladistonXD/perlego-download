@@ -24,6 +24,55 @@ async function downloadResultados(resultados, nomeArquivo) {
     clearIndexedDB();
 }
 
+async function getAllContent(db) {
+    return new Promise((resolve, reject) => {
+        const transaction = db.transaction(['conteudo'], 'readonly');
+        const store = transaction.objectStore('conteudo');
+        const allContentRequest = store.getAll();
+
+        allContentRequest.onsuccess = function (event) {
+            resolve(event.target.result);
+        };
+
+        allContentRequest.onerror = function (event) {
+            reject(event.error);
+        };
+    });
+}
+
+async function getAllKeys(db) {
+    return new Promise((resolve, reject) => {
+        const transaction = db.transaction(['conteudo'], 'readonly');
+        const store = transaction.objectStore('conteudo');
+        const getAllKeysRequest = store.getAllKeys();
+
+        getAllKeysRequest.onsuccess = function (event) {
+            resolve(event.target.result);
+        };
+
+        getAllKeysRequest.onerror = function (event) {
+            reject(event.error);
+        };
+    });
+}
+async function exibirMensagemInicial(pagefinal) {
+    const mensagemElement = document.createElement('div');
+    mensagemElement.style.position = 'fixed';
+    mensagemElement.style.top = '50%';
+    mensagemElement.style.left = '50%';
+    mensagemElement.style.transform = 'translate(-50%, -50%)';
+    mensagemElement.style.padding = '20px';
+    mensagemElement.style.background = '#ffffff';
+    mensagemElement.style.border = '1px solid #ccc';
+    mensagemElement.style.zIndex = '9999';
+    mensagemElement.style.fontWeight = 'bold';
+    mensagemElement.id = 'mensagem';
+    document.body.appendChild(mensagemElement);
+    const db = await openIndexedDB();
+    const ultimaPagina = await getLastProcessedIndex(db);
+    mensagemElement.textContent = `Page ${ultimaPagina}/${pagefinal} found. Keep scrolling to the page ${pagefinal}`;
+    return mensagemElement;
+}
 
 async function startSearchingAndSaving() {
     try {
@@ -39,6 +88,7 @@ async function startSearchingAndSaving() {
             node = result.iterateNext();
         }
         const pagefinal = Number(text);
+		const mensagemInicial = await exibirMensagemInicial(pagefinal);
 
         let stopButton = document.createElement('button');
         stopButton.textContent = 'Quit and save';
@@ -55,7 +105,7 @@ async function startSearchingAndSaving() {
         let resultadosArray = [];
 
         stopButton.addEventListener('click', async () => {
-			stopSearch = true;
+            stopSearch = true;
             stopButton.remove();
             const messages = document.querySelectorAll('div#mensagem');
             messages.forEach(message => {
@@ -64,10 +114,35 @@ async function startSearchingAndSaving() {
             window.clearTimeout(timeoutID);
             console.log("Busca encerrada pelo usuário.");
             const db = await openIndexedDB();
-            await putTodoConteudo(db, resultadosArray);
-            await downloadResultados(resultadosArray, 'perlego.html');
 
+            const allKeys = await getAllKeys(db);
+            let combinedContent = [];
+
+            for (const key of allKeys) {
+                const content = await getTodoConteudoByKey(db, key);
+                if (Array.isArray(content)) {
+                    combinedContent = combinedContent.concat(content);
+                }
+            }
+
+            await downloadResultados(combinedContent, 'perlego.html');
         });
+
+        async function getTodoConteudoByKey(db, key) {
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction(['conteudo'], 'readonly');
+                const store = transaction.objectStore('conteudo');
+                const request = store.get(key);
+
+                request.onsuccess = function (event) {
+                    resolve(event.target.result);
+                };
+
+                request.onerror = function (event) {
+                    reject(event.error);
+                };
+            });
+        }
 
         async function rolarAteEncontrarPagina(pagina) {
             const db = await openIndexedDB();
@@ -108,9 +183,15 @@ async function startSearchingAndSaving() {
                         const progressoAtual = Math.floor((pagina / pagefinal) * 100);
                         enviarProgresso(progressoAtual);
                         resultadosArray.push(conteudoElemento);
-
                         await putLastProcessedIndex(db, pagina);
-                        await putTodoConteudo(db, resultadosArray);
+                        const chunkSize = 50;
+                        let index = 0;
+                        while (index < resultadosArray.length) {
+                            const chunk = resultadosArray.slice(index, index + chunkSize);
+                            index += chunkSize;
+                            const paddedPage = `p${pagina}`.padStart(Math.max(4, `${pagina}`.length + 1), '0');
+                            await putTodoConteudo(db, paddedPage, chunk);
+                        }
                         rolarAteEncontrarPagina(pagina + 1);
                         if (pagina === pagefinal) {
                             stopButton.click();
@@ -211,15 +292,20 @@ async function getTodoConteudo(db) {
     });
 }
 
-async function putTodoConteudo(db, content) {
+async function putTodoConteudo(db, key, content) {
     return new Promise((resolve, reject) => {
         const transaction = db.transaction(['conteudo'], 'readwrite');
         const store = transaction.objectStore('conteudo');
-        const request = store.put(content, 'todoConteudo');
-        request.onsuccess = function (event) {
+        const getRequest = store.get(key);
+
+        getRequest.onsuccess = function (event) {
+            const existingData = event.target.result || [];
+            const newData = existingData.concat(content);
+            store.put(newData, key);
             resolve();
         };
-        request.onerror = function (event) {
+
+        getRequest.onerror = function (event) {
             reject(event.error);
         };
     });
