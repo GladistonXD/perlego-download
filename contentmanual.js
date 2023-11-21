@@ -88,7 +88,7 @@ async function startSearchingAndSaving() {
             node = result.iterateNext();
         }
         const pagefinal = Number(text);
-		const mensagemInicial = await exibirMensagemInicial(pagefinal);
+        const mensagemInicial = await exibirMensagemInicial(pagefinal);
 
         let stopButton = document.createElement('button');
         stopButton.textContent = 'Quit and save';
