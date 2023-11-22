@@ -124,7 +124,7 @@ async function criarArquivoDownloadComConteudo() {
                 await putLastProcessedIndex(db, lastProcessedIndex+1);
                 await putTodoConteudo(db, todoConteudoBruto);
             } catch (error) {
-                console.error(error);
+                console.log(error);
             }
         }
         let img_tags = todoConteudoBruto.split('</picture>');
