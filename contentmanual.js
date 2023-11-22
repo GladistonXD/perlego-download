@@ -88,7 +88,7 @@ async function startSearchingAndSaving() {
             node = result.iterateNext();
         }
         const pagefinal = Number(text);
-        const mensagemInicial = await exibirMensagemInicial(pagefinal);
+		const mensagemInicial = await exibirMensagemInicial(pagefinal);
 
         let stopButton = document.createElement('button');
         stopButton.textContent = 'Quit and save';
@@ -182,17 +182,21 @@ async function startSearchingAndSaving() {
                         console.log(`Conteúdo do elemento da página ${pagina} encontrado:`);
                         const progressoAtual = Math.floor((pagina / pagefinal) * 100);
                         enviarProgresso(progressoAtual);
-                        resultadosArray.push(conteudoElemento);
-                        await putLastProcessedIndex(db, pagina);
-                        const chunkSize = 50;
-                        let index = 0;
-                        while (index < resultadosArray.length) {
-                            const chunk = resultadosArray.slice(index, index + chunkSize);
-                            index += chunkSize;
-                            const paddedPage = `p${pagina}`.padStart(Math.max(4, `${pagina}`.length + 1), '0');
-                            await putTodoConteudo(db, paddedPage, chunk);
+                        try {
+                            resultadosArray.push(conteudoElemento);
+                            await putLastProcessedIndex(db, pagina);
+                            const chunkSize = 50;
+                            let index = 0;
+                            while (index < resultadosArray.length) {
+                                const chunk = resultadosArray.slice(index, index + chunkSize);
+                                index += chunkSize;
+                                const paddedPage = `p${pagina}`.padStart(Math.max(4, `${pagina}`.length + 1), '0');
+                                await putTodoConteudo(db, paddedPage, chunk);
+                            }
+                            rolarAteEncontrarPagina(pagina + 1);
+                        } catch(error) {
+                            console.log(error)
                         }
-                        rolarAteEncontrarPagina(pagina + 1);
                         if (pagina === pagefinal) {
                             stopButton.click();
                             stopSearch = true;
