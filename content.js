@@ -42,7 +42,11 @@ function clicarEcapturarConteudoBruto(indice, pagefinal) {
                         verificarElemento(); 
                     }, time);                     
                 } else {
-                    try    {
+                    var elementoCapturado = document.evaluate("//div[@class='chapter-loaded highlighter-context' and @id='p"+indice+"--0']", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+                    if (elementoCapturado) {
+                        resolve(elementoCapturado.outerHTML+'<br>\n\n');
+                    }
+                    try {
                         const num = indice+1
                         const elemento = document.evaluate("//div[@data-test-locator='Epub-ChapterRow-Page-"+num+"']/div", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
                         if (elemento) {                                
