@@ -23,8 +23,13 @@ function clicarEcapturarConteudoBruto(indice, pagefinal) {
         } else {
             try {
                 const elemento = document.evaluate("//div[@data-test-locator='Pdf-SubChapterRow-Page-"+indice+"']/div", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-                if (elemento) {
-                    elemento.click();
+                const elementosub = document.evaluate("//div[@data-test-locator='Pdf-SubSubChapterRow-Page-"+indice+"']/div", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+                if (elemento || elementosub) {
+                    if (elemento) {
+                        elemento.click();
+                    } else {
+                        elementosub.click();
+                    }
                     setTimeout(() => {
                             function verificarElemento() {
                                 var elementoCapturado = document.evaluate("//div[@class='chapter-loaded highlighter-context' and @id='p"+indice+"--0']", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
