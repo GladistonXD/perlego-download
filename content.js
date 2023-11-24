@@ -3,7 +3,7 @@ function enviarProgresso(progress){
 }
 
 function clicarEcapturarConteudoBruto(indice, pagefinal) {
-    const time = 4000
+    const time = 2000
     return new Promise((resolve, reject) => {
         var elementoIndex = document.querySelector('[data-test-locator="Epub-ChapterRow-Index-'+indice+'"] [tabindex="0"]');
         if (elementoIndex) {
