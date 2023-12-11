@@ -17,7 +17,8 @@ If the file is so large that the browser cannot process it, you can edit the .ht
 > # New function to continue where you left off:
 Now you can reload the page if it's stuck, then just click again to start and continue where you left off, and just below there is a button to reset this continuity if necessary.
 
-> For offline use it is necessary to transform the file into PDF, otherwise you will only view images online.
+> # To use offline:
+It is very important to convert the .html to PDF otherwise it will not be possible to use it offline and also the images have an expiration date, so it is necessary to convert to PDF, if you don't know how to do this, just press "Ctrl + P" with the open .html file and select "Save as PDF"
 
 # *Read the description of each format to avoid browser crashes*
 <p align="start">
@@ -26,4 +27,4 @@ Now you can reload the page if it's stuck, then just click again to start and co
 
 *After accessing the book normally via: `https://ereader.perlego.com/1/book/(ID*)` you can start the automation.*
 
->*I'm not responsible for anything, feel free to take this code and use it as you see fit, I don't guarantee it will work, there will probably be no updates as I'm in the 7-day free period, I made this script just for fun, some books may have specific bugs because I didn't have time to test all the possibilities.*
+>*There are no guarantees of functionality, feel free to take this code and use it as you see fit, there will probably be no updates as I am in the 7 day free period, some books may have specific bugs because I didn't have time to test all the possibilities.*
