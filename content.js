@@ -112,16 +112,28 @@ async function criarArquivoDownloadComConteudo() {
         let lastProcessedIndex = await getLastProcessedIndex(db) || 0;
         console.log(lastProcessedIndex)
         let todoConteudoBruto = await getTodoConteudo(db) || ''; 
-        const ultimoElemento = elementos[elementos.length - 1];
-        const ultimoIndicecont = ultimoElemento.getAttribute('data-test-locator').match(/\d+$/)[0];
-        const result = document.evaluate("/html/body/div[1]/main/div[1]/div[2]/div[3]/div/text()[3]",document,null,XPathResult.FIRST_ORDERED_NODE_TYPE,null).singleNodeValue;
-        const result2 = document.evaluate("/html/body/div[1]/main/div[1]/div[2]/div[4]/div/text()[3]",document,null,XPathResult.FIRST_ORDERED_NODE_TYPE,null).singleNodeValue;
-        let text = '';
+        //const ultimoElemento = elementos[elementos.length - 1];
+        //const ultimoIndicecont = ultimoElemento.getAttribute('data-test-locator').match(/\d+$/)[0];
+        //const result = document.evaluate("/html/body/div[1]/main/div[1]/div[2]/div[3]/div/text()[3]",document,null,XPathResult.FIRST_ORDERED_NODE_TYPE,null).singleNodeValue;
+        //const result2 = document.evaluate("/html/body/div[1]/main/div[1]/div[2]/div[4]/div/text()[3]",document,null,XPathResult.FIRST_ORDERED_NODE_TYPE,null).singleNodeValue;
+        //let text = '';
 
-        let node = result || result2;
-        text = node.textContent.trim();
-        const pagefinal = Number(text);
-		ultimoIndice = pagefinal || ultimoIndicecont
+        //let node = result || result2;
+        //text = node.textContent.trim();
+        var divs = document.querySelectorAll('div[data-test-locator]');
+        var maiorNumero = -1;
+        divs.forEach(function(elemento) {
+            var valor = elemento.getAttribute('data-test-locator');
+            var match = valor.match(/\d+/);
+            if (match !== null) {
+                var numero = parseInt(match[0]);
+                if (numero > maiorNumero) {
+                    maiorNumero = numero;
+                }
+            }
+        });
+        const pagefinal = maiorNumero;
+		ultimoIndice = pagefinal
         console.log("Última página é: " + ultimoIndice);
         for (let i = lastProcessedIndex; i <= ultimoIndice; i++) {
             try {
