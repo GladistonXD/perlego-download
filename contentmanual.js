@@ -76,18 +76,16 @@ async function exibirMensagemInicial(pagefinal) {
 
 async function startSearchingAndSaving() {
     try {
-        const result = document.evaluate("/html/body/div[1]/main/div[1]/div[2]/div[3]/div/text()[3]",document,null,XPathResult.ANY_TYPE,null);
-        const result2 = document.evaluate("/html/body/div[1]/main/div[1]/div[2]/div[4]/div/text()[3]",document,null,XPathResult.ANY_TYPE,null);
-        let text = '';
-        let node = result.iterateNext();
-        if (!node) {
-            node = result2.iterateNext();
+        var elemento = document.querySelector('div[data-test-locator="pagination-total-chapter-numbers"]');
+        var pagefinal = null;
+        if (elemento !== null) {
+            var conteudo = elemento.textContent.trim();
+            var numeros = conteudo.match(/\d+/g);
+            if (numeros !== null && numeros.length > 0) {
+                var numero = parseInt(numeros[0]);
+                pagefinal = Number(numero);
+            }
         }
-        while (node) {
-            text += node.textContent;
-            node = result.iterateNext();
-        }
-        const pagefinal = Number(text);
 		const mensagemInicial = await exibirMensagemInicial(pagefinal);
 
         let stopButton = document.createElement('button');
