@@ -133,7 +133,7 @@ async function criarArquivoDownloadComConteudo() {
             }
         });
         const pagefinal = maiorNumero;
-		ultimoIndice = pagefinal
+	ultimoIndice = pagefinal
         console.log("Última página é: " + ultimoIndice);
         for (let i = lastProcessedIndex; i <= ultimoIndice; i++) {
             try {
