@@ -119,7 +119,7 @@ async function startSearchingAndSaving() {
             for (const key of allKeys) {
                 const content = await getTodoConteudoByKey(db, key);
                 if (Array.isArray(content)) {
-                    combinedContent = combinedContent.concat(content);
+                    combinedContent = combinedContent.concat(`<script>function LoadHighlights(originalId){}</script>`+content);
                 }
             }
 
