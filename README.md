@@ -26,3 +26,5 @@ It is very important to convert the .html to PDF otherwise it will not be possib
 *After accessing the book normally via: `https://ereader.perlego.com/1/book/(ID*)` you can start the automation.*
 
 >*There are no guarantees of functionality, feel free to take this code and use it as you see fit, there will probably be no updates as I am in the 7 day free period, some books may have specific bugs because I didn't have time to test all the possibilities.*
+
+[<img src="https://github.com/user-attachments/assets/d8c9ad65-1188-4f4a-9cd5-433f5e8de31f" width="300" alt="Donate with PayPal">](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8BGXZC3GHQBL2)
