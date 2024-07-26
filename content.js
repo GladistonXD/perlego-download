@@ -168,7 +168,7 @@ async function criarArquivoDownloadComConteudo() {
             }
         }
 
-        let modificado = modified_html.replace(/">https:\/\/api.perlego/g, '" src="https://api.perlego').replace(/opacity: 0/g, 'opacity: 1').replace(/<.picture><.picture>/g, '</picture>');
+        let modificado = modified_html.replace(/">https:\/\/api.perlego/g, '" src="https://api.perlego').replace(/opacity: 0/g, 'opacity: 1').replace(/<.picture><.picture>/g, '</picture>').replace(/data-src=/g,'src=');
         var blob = new Blob([`<!DOCTYPE html><head><script>function scrollWithinBook(identifier, pageNumber) {var element;if (identifier === '') {element = document.getElementById('p' + pageNumber + '--0');} else {element = document.querySelector('[data-originalid="' + identifier + '"]');}if (element) {var yOffset = element.getBoundingClientRect().top + window.pageYOffset;window.scrollTo({ top: yOffset, behavior: 'smooth' });} else {}}function LoadChapter(identifier) {}function showImage(identifier) {}function scrollToDataOriginalId() {var hash = window.location.hash;if (hash) {var dataOriginalId = hash.substr(1);var element = document.querySelector('[data-originalid="' + dataOriginalId + '"]');if (element) {var yOffset = element.getBoundingClientRect().top + window.pageYOffset;window.scrollTo({ top: yOffset, behavior: 'smooth' });} else {}}}window.onload = function() {scrollToDataOriginalId();};</script><meta charset="UTF-8"></head><div id="content" class="content highlighter-context" col-centered="true" style="max-width: 792.952px;">`+modificado.replace(/Georgia; object-fit: contain; width: 100%; height: 100%;/g,'Georgia; object-fit: contain; width: 100%;')], { type: 'text/html' });
 
         var link = document.createElement('a');
